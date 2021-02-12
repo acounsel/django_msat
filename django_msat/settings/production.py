@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['msat.herokuapp.com',]
+ALLOWED_HOSTS = ['rmf-msat.herokuapp.com',]
 
 SECURE_SSL_REDIRECT = True
 

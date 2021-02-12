@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.generic import DetailView, ListView, View
 
 from assessments.models import (Mine, Company,
@@ -45,7 +47,9 @@ class AnswerQuestions(ListView):
                     )
             except Exception as error:
                 print(error)
-        return redirect('/')
+        messages.success(request, 
+            'Assessment Received; Thank You!')
+        return redirect(reverse('home'))
 
     def get_response(self, response):
         if response == 'true':
