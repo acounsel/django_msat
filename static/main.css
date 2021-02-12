@@ -1,3 +1,13 @@
 body {
   padding:20px;
 }
+.row-striped:nth-of-type(odd){
+  background-color: #efefef;
+}
+
+.row-striped:nth-of-type(even){
+  background-color: #ffffff;
+}
+.New{
+    border:1px;
+}
