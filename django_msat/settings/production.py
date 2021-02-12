@@ -4,7 +4,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['rmf-msat.herokuapp.com',]
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
 STATIC_URL = 'https://{0}/{1}/'.format(
     AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
