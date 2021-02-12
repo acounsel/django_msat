@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Mine Site Assessment Tool</title>
+    </head>
+    <body>
+        <h1>Mine Site Assessment</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {% for question in question_list %}
+            <p>
+                <input type="checkbox" name="{{question.id}}">{{ question }}
+            </p>
+            {% endfor %}
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

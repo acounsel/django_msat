@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Mine Site Assessment Tool</title>
+    </head>
+    <body>
+        <h1>List of Available Mines</h1>
+        <p>Here's the list of mines n stuff</p>
+        {% for mine in mine_list %}
+        <p>
+            <a href="{% url 'mine-detail' pk=mine.id %}">{{ mine }}</a>
+        </p>
+        {% endfor %}
+    </body>
+</html>
