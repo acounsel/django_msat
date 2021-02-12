@@ -22,7 +22,8 @@ class AnswerQuestions(ListView):
     model = Question
 
     def post(self, request):
-        company, mine, assessment = self.get_assessment(request)
+        company, mine, assessment = self.get_assessment(
+            request)
         for key, value in request.POST.items():
             self.create_response(key, value, assessment)
         self.add_null_responses(assessment)
@@ -50,10 +51,10 @@ class AnswerQuestions(ListView):
             pk, resp = key.split('_')
             question = Question.objects.get(id=int(pk))
             response = Response.objects.create(
-                   question=question,
-                   response=self.get_response(resp),
-                   assessment=assessment
-                )
+               question=question,
+               response=self.get_response(resp),
+               assessment=assessment
+            )
         except Exception as error:
             print(error)
 
