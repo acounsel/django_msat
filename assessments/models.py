@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django_msat.storage_backends import (PublicMediaStorage, 
+    PrivateMediaStorage)
+
 class Mine(models.Model):
 
     site_name = models.CharField(max_length=255)
@@ -34,6 +37,8 @@ class Assessment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     mine = models.ForeignKey(Mine, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    document = models.FileField(storage=PrivateMediaStorage(), 
+        upload_to='private/', blank=True, null=True)
 
     def __str__(self):
         return self.mine.site_name + ' Assessment: ' + self.user.first_name
