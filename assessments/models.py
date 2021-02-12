@@ -90,7 +90,7 @@ class Assessment(models.Model):
         upload_to='private/', blank=True, null=True)
 
     def __str__(self):
-        return '{} Assessment'.format(self.mine.site_name)
+        return '{} Assessment'.format(self.mine.name)
 
 class Response(models.Model):
 
@@ -106,8 +106,9 @@ class Response(models.Model):
     def get_answer(self):
         if self.response == True:
             return 'Yes'
-        else:
+        elif self.response == False:
             return 'No'
+        return 'N/A'
 
 
 

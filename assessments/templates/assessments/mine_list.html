@@ -7,7 +7,7 @@
         <p>Here's the list of mines n stuff</p>
         {% for mine in mine_list %}
         <p>
-            <a href="{% url 'mine-detail' pk=mine.id %}">{{ mine }}</a>
+            <a href="{% url 'mine_detail' pk=mine.id %}">{{ mine }}</a>
         </p>
         {% endfor %}
     </body>
