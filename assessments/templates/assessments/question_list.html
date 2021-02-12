@@ -4,20 +4,38 @@
     <h1>Mine Site Assessment</h1>
     <form method="POST">
         {% csrf_token %}
-        <label>Mine Site Name</label>
-        <input type="text" name="mine">
-        <label>Company Name</label>
-        <input type="text" name="company">
-        <label>Location</label>
-        <input type="text" name="location">
+        <div class="container border">
+            <label>Mine Site Name</label>
+            <input clas="" type="text" name="mine">
+            <label>Company Name</label>
+            <input type="text" name="company">
+            <label>Location</label>
+            <input type="text" name="location">
+        </div>
+        <div>
         {% regroup question_list by category as category_group %}
-            {% for category in category_group %}
-            <p>{{ category.grouper }}</p>
+        {% for category in category_group %}
+            <div class="container border">
+                <div class="row border-bottom">
+                    <div class="col">{{ category.grouper.order_id }}</div>
+                    <div class="col-11">{{ category.grouper }}</div>
+                </div>
+                <div class="row border-bottom">
+                    <div class="col"></div>
+                    <div class="col-9">For this mine site, does the company:</div>
+                    <div class="col">No</div>
+                    <div class="col">Yes</div>
+                </div>
                 {% for question in category.list %}
-                <p>{{ question }}<input type="checkbox" name="{{ question.id }}_false"><input type="checkbox" name="{{ question.id }}_true"></p>
+                <div class="row">
+                    <div class="col">{{ question.order_id }}</div>
+                    <div class="col-9">{{ question }}</div>
+                    <div class="col"><input type="checkbox" name="{{ question.id }}_false"></div><div class="col"><input type="checkbox" name="{{ question.id }}_true"></div>
+                </div>
                 {% endfor %}
-            {% endfor %}
-
+            </div>
+        {% endfor %}
+        </div>
         <input class="btn btn-primary" type="submit" value="Submit">
     </form>
 {% endblock %}
