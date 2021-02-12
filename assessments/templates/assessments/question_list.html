@@ -1,17 +1,23 @@
-<html>
-    <head>
-        <title>Mine Site Assessment Tool</title>
-    </head>
-    <body>
-        <h1>Mine Site Assessment</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {% for question in question_list %}
-            <p>
-                <input type="checkbox" name="{{question.id}}">{{ question }}
-            </p>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>Mine Site Assessment</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Mine Site Name</label>
+        <input type="text" name="mine">
+        <label>Company Name</label>
+        <input type="text" name="company">
+        <label>Location</label>
+        <input type="text" name="location">
+        {% regroup question_list by category as category_group %}
+            {% for category in category_group %}
+            <p>{{ category.grouper }}</p>
+                {% for question in category.list %}
+                <p>{{ question }}<input type="checkbox" name="{{ question.id }}_false"><input type="checkbox" name="{{ question.id }}_true"></p>
+                {% endfor %}
             {% endfor %}
-            <input type="submit" value="Submit">
-        </form>
-    </body>
-</html>
+
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+{% endblock %}

@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'assessments',
 ]
 
@@ -136,5 +137,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 django_heroku.settings(locals(), staticfiles=False)

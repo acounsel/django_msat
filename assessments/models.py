@@ -27,7 +27,7 @@ class Country(models.Model):
 
     name = models.CharField(max_length=255)
     region = models.CharField(max_length=100,
-        choices=REGION_CHOICES)
+        choices=REGION_CHOICES, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -78,7 +78,7 @@ class Response(models.Model):
 
     question = models.ForeignKey(Question, 
         on_delete=models.CASCADE)
-    response = models.BooleanField()
+    response = models.BooleanField(null=True)
     assessment = models.ForeignKey(Assessment, 
         on_delete=models.CASCADE)
 
