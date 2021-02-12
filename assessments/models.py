@@ -4,14 +4,45 @@ from django.contrib.auth.models import User
 from django_msat.storage_backends import (PublicMediaStorage, 
     PrivateMediaStorage)
 
-class Mine(models.Model):
+class Company(models.Model):
 
-    site_name = models.CharField(max_length=255)
-    company_name = models.CharField(max_length=255)
-    location = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.site_name
+        return self.name
+
+class Country(models.Model):
+    AMERICA = 'america'
+    EUROPE = 'europe'
+    AFRICA = 'africa'
+    ASIA = 'asia'
+    OCEANIA = 'oceania'
+    REGION_CHOICES = (
+        (AMERICA, 'Americas'),
+        (EUROPE, 'Europe'),
+        (AFRICA, 'Africa'),
+        (ASIA, 'Asia'),
+        (OCEANIA, 'Oceania')
+    )
+
+    name = models.CharField(max_length=255)
+    region = models.CharField(max_length=100,
+        choices=REGION_CHOICES)
+
+    def __str__(self):
+        return self.name
+
+class Mine(models.Model):
+
+    name = models.CharField(max_length=255)
+    company = models.ForeignKey(Company, 
+        on_delete=models.SET_NULL, blank=True, null=True)
+    country = models.ForeignKey(Country,
+        on_delete=models.SET_NULL, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.name
 
 class QuestionCategory(models.Model):
 
