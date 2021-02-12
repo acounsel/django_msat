@@ -13,6 +13,9 @@ class MineList(ListView):
 class MineDetail(DetailView):
     model = Mine
 
+class AssessmentList(ListView):
+    model = Assessment
+
 class AssessmentDetail(DetailView):
     model = Assessment
 

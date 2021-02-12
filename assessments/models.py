@@ -1,3 +1,5 @@
+import uuid as uuid_lib
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -50,6 +52,10 @@ class QuestionCategory(models.Model):
     name = models.CharField(max_length=255)
     about = models.TextField()
 
+    class Meta(object):
+        ordering = ('order_id',)
+        verbose_name_plural = 'Question categories'
+
     def __str__(self):
         return self.name
 
@@ -60,19 +66,25 @@ class Question(models.Model):
     category = models.ForeignKey(QuestionCategory, 
         on_delete=models.CASCADE)
 
+    class Meta(object):
+        ordering = ('order_id',)
+
     def __str__(self):
-        return self.category.name + ": " + self.name
+        return self.name
 
 class Assessment(models.Model):
 
+    uuid = models.UUIDField(db_index=True, 
+        default=uuid_lib.uuid4, editable=False)
     date = models.DateTimeField(auto_now_add=True)
     mine = models.ForeignKey(Mine, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, 
+        on_delete=models.SET_NULL, blank=True, null=True)
     document = models.FileField(storage=PrivateMediaStorage(), 
         upload_to='private/', blank=True, null=True)
 
     def __str__(self):
-        return self.mine.site_name + ' Assessment: ' + self.user.first_name
+        return '{} Assessment'.format(self.mine.site_name)
 
 class Response(models.Model):
 
@@ -83,8 +95,7 @@ class Response(models.Model):
         on_delete=models.CASCADE)
 
     def __str__(self):
-        question = self.question.name
-        return question + ' ' + self.get_answer()
+        return self.get_answer()
 
     def get_answer(self):
         if self.response == True:
