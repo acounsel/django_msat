@@ -10,6 +10,9 @@ class Company(models.Model):
 
     name = models.CharField(max_length=255)
 
+    class Meta(object):
+        verbose_name_plural = 'Companies'
+
     def __str__(self):
         return self.name
 
@@ -30,6 +33,9 @@ class Country(models.Model):
     name = models.CharField(max_length=255)
     region = models.CharField(max_length=100,
         choices=REGION_CHOICES, blank=True, null=True)
+
+    class Meta(object):
+        verbose_name_plural = 'Countries'
 
     def __str__(self):
         return self.name
@@ -67,7 +73,7 @@ class Question(models.Model):
         on_delete=models.CASCADE)
 
     class Meta(object):
-        ordering = ('order_id',)
+        ordering = ('category', 'order_id',)
 
     def __str__(self):
         return self.name
