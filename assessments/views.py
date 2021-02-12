@@ -4,10 +4,7 @@ from django.views.generic import DetailView, ListView, View
 from assessments.models import (Mine, Company,
     QuestionCategory, Question, Assessment, Response)
 
-def home(request):
-    return render(request, 'home.html')
-
-class MineList(ListView):
+class Home(ListView):
     model = Mine
 
 class MineDetail(DetailView):
