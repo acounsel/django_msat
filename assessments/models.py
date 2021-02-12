@@ -10,6 +10,9 @@ class Company(models.Model):
 
     name = models.CharField(max_length=255)
 
+    class Meta(object):
+        verbose_name_plural = 'Companies'
+
     def __str__(self):
         return self.name
 
@@ -30,6 +33,9 @@ class Country(models.Model):
     name = models.CharField(max_length=255)
     region = models.CharField(max_length=100,
         choices=REGION_CHOICES, blank=True, null=True)
+
+    class Meta(object):
+        verbose_name_plural = 'Countries'
 
     def __str__(self):
         return self.name
@@ -67,7 +73,7 @@ class Question(models.Model):
         on_delete=models.CASCADE)
 
     class Meta(object):
-        ordering = ('order_id',)
+        ordering = ('category', 'order_id',)
 
     def __str__(self):
         return self.name
@@ -84,7 +90,7 @@ class Assessment(models.Model):
         upload_to='private/', blank=True, null=True)
 
     def __str__(self):
-        return '{} Assessment'.format(self.mine.site_name)
+        return '{} Assessment'.format(self.mine.name)
 
 class Response(models.Model):
 
@@ -100,8 +106,9 @@ class Response(models.Model):
     def get_answer(self):
         if self.response == True:
             return 'Yes'
-        else:
+        elif self.response == False:
             return 'No'
+        return 'N/A'
 
 
 
