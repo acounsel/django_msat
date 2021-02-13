@@ -2,6 +2,7 @@ import uuid as uuid_lib
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from django_msat.storage_backends import (PublicMediaStorage, 
     PrivateMediaStorage)

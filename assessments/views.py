@@ -6,7 +6,12 @@ from django.views.generic import DetailView, ListView, View
 from assessments.models import (Mine, Company,
     QuestionCategory, Question, Assessment, Response)
 
-class Home(ListView):
+class Home(View):
+
+    def get(self, request):
+        return render(request, 'home.html')
+
+class MineList(ListView):
     model = Mine
 
 class MineDetail(DetailView):
