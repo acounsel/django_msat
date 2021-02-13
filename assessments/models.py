@@ -57,6 +57,14 @@ class Mine(models.Model):
     def get_absolute_url(self):
         return reverse('mine_detail', kwargs={'pk':self.id})
 
+    def get_avg_score(self):
+        responses = Response.objects.filter(
+            assessment__mine=self).distinct()
+        if responses:
+            yeses = responses.filter(response=True)
+            return (yeses.count() / responses.count()) * 100
+        return None
+
 class QuestionCategory(models.Model):
 
     order_id = models.IntegerField()
@@ -100,6 +108,11 @@ class Assessment(models.Model):
     def get_absolute_url(self):
         return reverse('assessment_detail', 
             kwargs={'pk':self.id})
+
+    def get_score(self):
+        responses = self.response_set.all()
+        yeses = responses.filter(response=True)
+        return (yeses.count() / responses.count()) * 100
 
     def get_responses_by_category(self):
         categories = {}

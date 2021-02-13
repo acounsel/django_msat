@@ -12,16 +12,22 @@
     <h4>Location: {{ mine.location }}</h4>
   </div>
   <div class="border-top">
-    <h3>Assessments of this mine</h3>
-    {% for assessment in mine.assessment_set.all %}
-      <div class="container m-2">
-        <p class="border-bottom"><a href="{{ assessment.get_absolute_url }}">{{ assessment.date }} - By {{ assessment.user }}</a></p>
-        {% for response in assessment.response_set.all %}
-          <p class="m-2">{{response.question}}: 
-            <strong>{{ response.get_answer }}</strong>
-          </p>
-        {% endfor %}
-      </div>
-    {% endfor %}
+    <h3 class="pt-5">Assessments of this mine</h3>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Conducted By</th>
+          <th scope="col">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for assessment in mine.assessment_set.all %}
+        <th scope="row"><a href="{{ assessment.get_absolute_url }}">{{ assessment.date }}</a></th>
+        <td><a href="{{ assessment.get_absolute_url }}">{{ assessment.user }}</a></td>
+        <td><a href="{{ assessment.get_absolute_url }}">{{ assessment.get_score|stringformat:"d%%" }}</a></td>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 {% endblock %}

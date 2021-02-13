@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -13,6 +14,11 @@ class Home(View):
 
 class MineList(ListView):
     model = Mine
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['maps_api_key'] = settings.GOOGLEMAPS_API_KEY
+        return context
 
 class MineDetail(DetailView):
     model = Mine

@@ -35,8 +35,13 @@
     {% for category in category_group %}
       <div class="container border mb-4">
         <div class="row border-bottom row-striped">
-          <div class="col h4 pt-1">{{ category.grouper.order_id }}</div>
-          <div class="col-11 font-weight-bold h4 pt-1">{{ category.grouper }}</div>
+          <div class="col-8">
+            <div class="row">
+              <div class="col h4 pt-1">{{ category.grouper.order_id }}</div>
+              <div class="col-11 font-weight-bold h4 pt-1">{{ category.grouper }}</div>
+            </div>
+          </div>
+          <div class="col-4"></div>
         </div>
         <div class="New row border-bottom row-striped">
           <div class="col-6">
@@ -48,8 +53,8 @@
           <div class="col-4"></div>
           <div class="col-2">
             <div class="row">
-              <div class="col">No</div>
-              <div class="col">Yes</div>
+              <div class="col text-center"><strong>No</strong></div>
+              <div class="col text-center"><strong>Yes</strong></div>
             </div>
           </div>
         </div>
@@ -64,8 +69,8 @@
           <div class="col-2"></div>
           <div class="col-2">
             <div class="row">
-              <div class="col"><input type="radio" value="False" name="{{ question.id }}"></div>
-              <div class="col"><input type="radio" value="True" name="{{ question.id }}"></div>
+              <div class="col text-center"><input type="radio" value="False" name="{{ question.id }}"></div>
+              <div class="col text-center"><input type="radio" value="True" name="{{ question.id }}"></div>
             </div>
           </div>
         </div>

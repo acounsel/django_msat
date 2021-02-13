@@ -138,7 +138,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+GOOGLEMAPS_API_KEY = get_env_variable('GOOGLEMAPS_API_KEY')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 django_heroku.settings(locals(), staticfiles=False)
