@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
+{% block head %}
+<meta property="og:title" content="Mine Site Assessment Tool" />
+<meta property="og:url" content="https://www.rmf-msat.herokuapp.com{{ mine.get_absolute_url }}" />
+<meta property="og:type" content="article" />
+<!-- <meta property="og:description" content="Assess " /> -->
+{% endblock %}
 {% block content %}
-    <h1>Mine Site Assessment</h1>
+    <h3>Complete an Assessment</h3>
     <form method="POST">
         {% csrf_token %}
         <div class="container border p-2 mb-4">
