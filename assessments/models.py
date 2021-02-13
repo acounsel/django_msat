@@ -1,6 +1,7 @@
 import uuid as uuid_lib
 
 from django.db import models
+from django.db.models import Count, Q
 from django.contrib.auth.models import User
 from django.urls import reverse
 
@@ -95,6 +96,24 @@ class Assessment(models.Model):
 
     def __str__(self):
         return '{} Assessment'.format(self.mine.name)
+
+    def get_responses_by_category(self):
+        categories = {}
+        yes = Count('response', filter=Q(response=True))
+        no = Count('response', filter=Q(response=False))
+        for category in QuestionCategory.objects.all():
+            yes, no, null = 0,0,0
+            responses = self.response_set.filter(
+                question__category=category)
+            for i in responses:
+                if i.response == True:
+                    yes += 1
+                elif i.response == False:
+                    no += 1
+                else:
+                    null +=1
+            categories[category.name] = (yes, no, null) 
+        return categories
 
 class Response(models.Model):
 
