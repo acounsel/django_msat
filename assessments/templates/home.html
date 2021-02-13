@@ -3,9 +3,10 @@
 {% endblock %}
 {% block content %}
   <div class="container">
-    <p class="text-center">
+    <div class="text-center d-flex justify-content-around w-50 mx-auto">
       <a class="btn btn-primary btn-lg mb-5" href="{% url 'answer_questions' %}">Conduct An Assessment</a>
-    </p>
+      <a class="btn btn-secondary btn-lg mb-5 ml-5" href="{% url 'mine_list' %}">View Mines</a>
+    </div>
     <div class="row">
       <div class="col-3">
         <img style="width: 100%" src="https://www.responsibleminingfoundation.org/app/uploads/MSAT-cover.jpg">

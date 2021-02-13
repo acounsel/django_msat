@@ -25,7 +25,7 @@
       {% for response in data.1 %}
         <tr>
           <td class="align-middle">{{ response.question.name }}</td>
-          <td class="text-center">{% if response.response == False %}<i class="fas fa-times fa-2x text-danger"></i>{% elif response.response == True %}<i class="fas fa-check fa-2x text-success"></i>{% endif %}</td>
+          <td class="text-center">{% if response.response == False %}<i class="fas fa-times fa-2x text-danger"></i>{% elif response.response == True %}<i class="fas fa-check fa-2x text-success"></i>{% else %}<i class="fas fa-question fa-2x"></i>{% endif %}</td>
         </tr>
       {% endfor %}
       </tbody>
