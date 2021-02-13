@@ -1,24 +1,33 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+
 {% block content %}
     <h1>Mine Site Assessment</h1>
     <form method="POST">
         {% csrf_token %}
-        <div class="container border">
-            <label>Mine Site Name</label>
-            <input clas="" type="text" name="mine">
-            <label>Company Name</label>
-            <input type="text" name="company">
-            <label>Location</label>
-            <input type="text" name="location">
+        <div class="container border p-2 mb-4">
+            <div class="form-group row">
+                <label class="col-3 col-form-label">Mine site name:</label>
+                <div class="col-9 col-form-label">
+                    <input type="text" name="mine">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label">Company name:</label>
+                <div class="col-9 col-form-label"><input type="text" name="company"></div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label">Location:</label>
+                <div class="col-9 col-form-label"><input type="text" name="location"></div>
+            </div>
         </div>
         <div>
         {% regroup question_list by category as category_group %}
         {% for category in category_group %}
-            <div class="container border">
+            <div class="container border mb-4">
                 <div class="row border-bottom row-striped">
                     <div class="col">{{ category.grouper.order_id }}</div>
-                    <div class="col-11">{{ category.grouper }}</div>
+                    <div class="col-11 font-weight-bold">{{ category.grouper }}</div>
                 </div>
                 <div class="New row border-bottom row-striped">
                     <div class="col"></div>

@@ -52,6 +52,9 @@ class Mine(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('mine_detail', kwargs={'pk':self.id})
+
 class QuestionCategory(models.Model):
 
     order_id = models.IntegerField()

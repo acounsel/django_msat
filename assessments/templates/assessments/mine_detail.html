@@ -1,4 +1,11 @@
-<html>
+{% extends 'base.html' %}
+{% block head %}
+<meta property="og:title" content="{{ mine.name }}" />
+<meta property="og:url" content="https://www.rmf-msat.herokuapp.com{{ mine.get_absolute_url }}" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="{{ mine.name }}, {{ mine.company }}, {{ mine.location }}" />
+{% endblock %}
+{% block content %}
     <head>
         <title>Mine Site Assessment Tool</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -18,3 +25,4 @@
         {% endfor %}
     </body>
 </html>
+{% endblock %}
