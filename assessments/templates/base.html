@@ -7,6 +7,10 @@
     <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
   </head>
   {% block head %}
+  <meta property="og:title" content="{{ mine.name }}" />
+  <meta property="og:url" content="https://www.rmf-msat.herokuapp.com{{ mine.get_absolute_url }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="{{ mine.name }}, {{ mine.company }}, {{ mine.location }}" />
   {% endblock %}
 
   <body>
@@ -39,5 +43,7 @@
         });
     });
   </script>
+  {% endblock %}
+  {% block javascript %}
   {% endblock %}
 </html>

@@ -30,11 +30,13 @@ class AnswerQuestions(ListView):
         company, mine, assessment = self.get_assessment(
             request)
         for key, value in request.POST.items():
+            print(key, value)
             self.create_response(key, value, assessment)
         self.add_null_responses(assessment)
         messages.success(request, 
             'Assessment Received; Thank You!')
-        return redirect(reverse('home'))
+        return redirect(reverse('assessment_detail', 
+            kwargs={'pk':assessment.id}))
 
     def get_assessment(self, request):
         company, created = Company.objects.get_or_create(
@@ -53,18 +55,17 @@ class AnswerQuestions(ListView):
 
     def create_response(self, key, value, assessment):
         try:
-            pk, resp = key.split('_')
-            question = Question.objects.get(id=int(pk))
+            question = Question.objects.get(id=int(key))
             response = Response.objects.create(
                question=question,
-               response=self.get_response(resp),
+               response=self.get_response(value),
                assessment=assessment
             )
         except Exception as error:
             print(error)
 
     def get_response(self, response):
-        if response == 'true':
+        if response == 'True':
             return True
         else:
             return False
