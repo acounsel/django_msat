@@ -18,16 +18,14 @@
       <thead>
         <tr>
           <th>Question</th>
-          <th>No</th>
-          <th>Yes</th>
+          <th class="text-center">Compliance</th>
         </tr>
       </thead>
       <tbody>
       {% for response in data.1 %}
         <tr>
-          <td>{{ response.question.name }}</td>
-          <td>{% if response.response == False %}X{% endif %}</td>
-          <td>{% if response.response == True %}X{% endif %}</td>
+          <td class="align-middle">{{ response.question.name }}</td>
+          <td class="text-center">{% if response.response == False %}<i class="fas fa-times fa-2x text-danger"></i>{% elif response.response == True %}<i class="fas fa-check fa-2x text-success"></i>{% endif %}</td>
         </tr>
       {% endfor %}
       </tbody>

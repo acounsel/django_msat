@@ -97,6 +97,10 @@ class Assessment(models.Model):
     def __str__(self):
         return '{} Assessment'.format(self.mine.name)
 
+    def get_absolute_url(self):
+        return reverse('assessment_detail', 
+            kwargs={'pk':self.id})
+
     def get_responses_by_category(self):
         categories = {}
         yes = Count('response', filter=Q(response=True))

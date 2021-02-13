@@ -15,7 +15,7 @@
     <h3>Assessments of this mine</h3>
     {% for assessment in mine.assessment_set.all %}
       <div class="container m-2">
-        <p class="border-bottom">{{ assessment.date }} - By {{ assessment.user }}</p>
+        <p class="border-bottom"><a href="{{ assessment.get_absolute_url }}">{{ assessment.date }} - By {{ assessment.user }}</a></p>
         {% for response in assessment.response_set.all %}
           <p class="m-2">{{response.question}}: 
             <strong>{{ response.get_answer }}</strong>
