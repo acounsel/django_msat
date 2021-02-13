@@ -11,7 +11,28 @@
   <div class="mt-5 border-top">
     <h3 class="mt-4">Results</h3>
     <div id="id_categoryResults"></div>
-    {{ assessment.get_responses_by_category }}
+    {% for category, data in assessment.get_responses_by_category.items %}
+    <h4 class="mt-5">{{ category }} ({{ data.2.0 }}/{{ data.2.3 }})</h4>
+    <p>{{ data.0 }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>No</th>
+          <th>Yes</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for response in data.1 %}
+        <tr>
+          <td>{{ response.question.name }}</td>
+          <td>{% if response.response == False %}X{% endif %}</td>
+          <td>{% if response.response == True %}X{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endfor %}
   </div>
 {% endblock %}
 {% block javascript %}
@@ -20,30 +41,21 @@
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["Copper", 8.94, "#b87333"],
-        ["Silver", 10.49, "silver"],
-        ["Gold", 19.30, "gold"],
-        ["Platinum", 21.45, "color: #e5e4e2"]
+        ["Category", "Yes", "No", "N/A", { role: "annotation" } ],
+        {% for cat, values in assessment.get_responses_by_category.items %}
+        ["{{ cat }}", {{ values.2.0 }}, {{ values.2.1 }}, {{ values.2.2 }}, ""],
+        {% endfor %}
       ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
       var options = {
-        title: "Density of Precious Metals, in g/cm^3",
         width: 600,
         height: 400,
         bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+        legend: { position: "top" },
+        isStacked: 'percent',
       };
       var chart = new google.visualization.BarChart(document.getElementById("id_categoryResults"));
-      chart.draw(view, options);
+      chart.draw(data, options);
   }
   </script>
 {% endblock %}

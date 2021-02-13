@@ -102,6 +102,27 @@ class Assessment(models.Model):
         yes = Count('response', filter=Q(response=True))
         no = Count('response', filter=Q(response=False))
         for category in QuestionCategory.objects.all():
+            yes, no, null, count = 0,0,0,0
+            responses = self.response_set.filter(
+                question__category=category)
+            for i in responses:
+                count +=1
+                if i.response == True:
+                    yes += 1
+                elif i.response == False:
+                    no += 1
+                else:
+                    null +=1
+            counts = (yes, no, null, count)
+            categories[category.name] = (
+                category.about, responses, counts)
+        return categories
+
+    def get_response_count_by_category(self):
+        categories = {}
+        yes = Count('response', filter=Q(response=True))
+        no = Count('response', filter=Q(response=False))
+        for category in QuestionCategory.objects.all():
             yes, no, null = 0,0,0
             responses = self.response_set.filter(
                 question__category=category)
