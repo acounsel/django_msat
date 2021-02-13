@@ -7,49 +7,80 @@
 <!-- <meta property="og:description" content="Assess " /> -->
 {% endblock %}
 {% block content %}
-    <h3>Complete an Assessment</h3>
-    <form method="POST">
-        {% csrf_token %}
-        <div class="container border p-2 mb-4">
-            <div class="form-group row">
-                <label class="col-3 col-form-label">Mine site name:</label>
-                <div class="col-9 col-form-label">
-                    <input type="text" name="mine" class="select">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-3 col-form-label">Company name:</label>
-                <div class="col-9 col-form-label"><input type="text" name="company"></div>
-            </div>
-            <div class="form-group row">
-                <label class="col-3 col-form-label">Location:</label>
-                <div class="col-9 col-form-label"><input type="text" name="location"></div>
-            </div>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="container">
+      <h3 class="h4">Complete an Assessment</h3>
+    </div>
+    <div class="container border p-2 mb-4">
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Mine site name:</label>
+        <div class="col-3 col-form-label">
+            <input type="text" name="mine" class="select w-100">
         </div>
-        <div>
-        {% regroup question_list by category as category_group %}
-        {% for category in category_group %}
-            <div class="container border mb-4">
-                <div class="row border-bottom row-striped">
-                    <div class="col">{{ category.grouper.order_id }}</div>
-                    <div class="col-11 font-weight-bold">{{ category.grouper }}</div>
-                </div>
-                <div class="New row border-bottom row-striped">
-                    <div class="col"></div>
-                    <div class="col-9">For this mine site, does the company:</div>
-                    <div class="col">No</div>
-                    <div class="col">Yes</div>
-                </div>
-                {% for question in category.list %}
-                <div class="row row-striped">
-                    <div class="col">{{ question.order_id }}</div>
-                    <div class="col-9">{{ question }}</div>
-                    <div class="col"><input type="checkbox" name="{{ question.id }}_false"></div><div class="col"><input type="checkbox" name="{{ question.id }}_true"></div>
-                </div>
-                {% endfor %}
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Company name:</label>
+        <div class="col-3 col-form-label">
+          <input type="text" name="company" class="w-100"></div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Location:</label>
+        <div class="col-3 col-form-label">
+          <input type="text" name="location" class="w-100"></div>
+      </div>
+    </div>
+    <div>
+    {% regroup question_list by category as category_group %}
+    {% for category in category_group %}
+      <div class="container border mb-4">
+        <div class="row border-bottom row-striped">
+          <div class="col h4 pt-1">{{ category.grouper.order_id }}</div>
+          <div class="col-11 font-weight-bold h4 pt-1">{{ category.grouper }}</div>
+        </div>
+        <div class="New row border-bottom row-striped">
+          <div class="col-6">
+            <div class="row">
+              <div class="col"></div>
+              <div class="col-11">For this mine site, does the company:</div>
             </div>
+          </div>
+          <div class="col-4"></div>
+          <div class="col-2">
+            <div class="row">
+              <div class="col">No</div>
+              <div class="col">Yes</div>
+            </div>
+          </div>
+        </div>
+        {% for question in category.list %}
+        <div class="row row-striped">
+          <div class="col-8">
+            <div class="row">
+              <div class="col">{{ question.order_id }}</div>
+              <div class="col-11">{{ question }}</div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-2">
+            <div class="row">
+              <div class="col"><input type="radio" value="False" name="{{ question.id }}"></div>
+              <div class="col"><input type="radio" value="True" name="{{ question.id }}"></div>
+            </div>
+          </div>
+        </div>
         {% endfor %}
+      </div>
+    {% endfor %}
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-10">
         </div>
-        <input class="btn btn-primary" type="submit" value="Submit">
-    </form>
+        <div class="col-2">
+          <input class="btn btn-primary btn-lg w-100" type="submit" value="Submit">
+        </div>
+      </div>
+    </div>
+  </form>
 {% endblock %}

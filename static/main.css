@@ -1,13 +1,19 @@
-body {
-  padding:20px;
+input[type=radio] {
+  transform: scale(1.5);
+  padding: 10px;
+}
+.navbar .navbar-brand {
+  margin-left: 30px;
 }
 .row-striped:nth-of-type(odd){
   background-color: #ffffff;
 }
-
 .row-striped:nth-of-type(even){
   background-color: #efefef;
 }
 .blue-color{
     color:#6eaac2;
+}
+.row {
+  padding: 10px;
 }

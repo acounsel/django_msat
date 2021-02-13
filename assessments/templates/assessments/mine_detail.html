@@ -6,22 +6,22 @@
 <meta property="og:description" content="{{ mine.name }}, {{ mine.company }}, {{ mine.location }}" />
 {% endblock %}
 {% block content %}
-    <div>
-        <h3>Mine site name: {{ mine.name }}</h3>
-        <h4 class="">Company: {{ mine.company.name }}</h4>
-        <h4>Location: {{ mine.location }}</h4>
-    </div>
-    <div class="border-top">
-        <h3>Assessments of this mine</h3>
-        {% for assessment in mine.assessment_set.all %}
-            <div class="container m-2">
-                <p class="border-bottom">{{ assessment.date }} - By {{ assessment.user }}</p>
-                {% for response in assessment.response_set.all %}
-                    <p class="m-2">{{response.question}}: 
-                        <strong>{{ response.get_answer }}</strong>
-                    </p>
-            {% endfor %}
-            </div>
+  <div>
+    <h3>Mine site name: {{ mine.name }}</h3>
+    <h4 class="">Company: {{ mine.company.name }}</h4>
+    <h4>Location: {{ mine.location }}</h4>
+  </div>
+  <div class="border-top">
+    <h3>Assessments of this mine</h3>
+    {% for assessment in mine.assessment_set.all %}
+      <div class="container m-2">
+        <p class="border-bottom">{{ assessment.date }} - By {{ assessment.user }}</p>
+        {% for response in assessment.response_set.all %}
+          <p class="m-2">{{response.question}}: 
+            <strong>{{ response.get_answer }}</strong>
+          </p>
         {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
