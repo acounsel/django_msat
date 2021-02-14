@@ -34,7 +34,8 @@ class Country(models.Model):
 
     name = models.CharField(max_length=255)
     region = models.CharField(max_length=100,
-        choices=REGION_CHOICES, blank=True, null=True)
+        choices=REGION_CHOICES, blank=True)
+    code = models.CharField(max_length=2, blank=True)
 
     class Meta(object):
         verbose_name_plural = 'Countries'
