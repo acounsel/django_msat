@@ -55,8 +55,10 @@ class AnswerQuestions(ListView):
         )
         assessment = Assessment.objects.create(
             mine=mine,
-            user=request.user
         )
+        if request.user.is_authenticated:
+            assessment.user =request.user
+            assessment.save()
         return company, mine, assessment
 
     def create_response(self, key, value, assessment):

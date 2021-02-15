@@ -38,6 +38,7 @@ class Country(models.Model):
     code = models.CharField(max_length=2, blank=True)
 
     class Meta(object):
+        ordering = ('name',)
         verbose_name_plural = 'Countries'
 
     def __str__(self):
